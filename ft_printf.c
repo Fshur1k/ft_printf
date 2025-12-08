@@ -6,7 +6,7 @@
 /*   By: ofedota <ofedota@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 21:25:14 by ofedota           #+#    #+#             */
-/*   Updated: 2025/12/08 22:26:29 by ofedota          ###   ########.fr       */
+/*   Updated: 2025/12/08 22:40:11 by ofedota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,19 @@ static int write_str(char *str)
 	return (count);
 }
 
+int	print_uint(unsigned int num)
+{
+	char	c;
+	int 	count;
+
+	count = 0;
+	if (num >= 10)
+		count += print_uint(num/10);
+	c = (num % 10) + '0';
+	count += write(1, &c, 1);
+	return (count);
+}
+
 int	ft_printf(const char *str, ...)
 {
 	va_list	args;
@@ -44,7 +57,7 @@ int	ft_printf(const char *str, ...)
 		{
 			i++;
 			char new_char = (char)va_arg(args, int);
-			count+=write(1, &new_char, 1);
+			count += write(1, &new_char, 1);
 		}
 		else if (str[i] == '%' && str[i+1] == 's')
 		{
@@ -68,9 +81,7 @@ int	ft_printf(const char *str, ...)
 		else if  (str[i] == '%' && str[i+1] == 'u')
 		{
 			i++;
-			unsigned int new_u = va_arg(args, unsigned int);
-			count += len_uint(new_u);
-			print_uint(new_u);
+			count += print_uint(va_arg(args, unsigned int));
 		}
 		else if (str[i] == '%' && str[i+1] == 'x')
 		{
@@ -83,10 +94,7 @@ int	ft_printf(const char *str, ...)
 			count += ft_print_hex(va_arg(args, unsigned int), 1);
 		}
 		else
-		{
-			ft_putchar_fd((char)str[i], 1);
-			count++;
-		}
+			count += write(1, str + i, 1);
 		i++;
 	}
 	va_end(args);
@@ -97,7 +105,7 @@ int	ft_printf(const char *str, ...)
 int main(void)
 {
 	char *str = NULL;
-	ft_printf("%d\n",ft_printf("%s\n", str));
-	printf("%d\n",printf("%s\n", str));
+	ft_printf("%d\n",ft_printf("char:%s\n", str));
+	printf("%d\n",printf("char:%s\n", str));
 	return (0);
 }
