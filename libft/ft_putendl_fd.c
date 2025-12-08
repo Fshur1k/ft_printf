@@ -1,20 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofedota <ofedota@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/01 18:51:26 by ofedota           #+#    #+#             */
-/*   Updated: 2025/12/08 21:39:06 by ofedota          ###   ########.fr       */
+/*   Created: 2025/11/21 18:20:12 by ofedota           #+#    #+#             */
+/*   Updated: 2025/11/21 21:07:23 by ofedota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
+#include "libft.h"
 
-int		ft_printf(const char *str, ...);
-void	print_uint(unsigned int num);
-int		ft_print_hex(unsigned int num, int is_upper);
-int		ft_print_ptr(void *ptr);
-int		len_uint(unsigned int num);
+/**
+ * @brief Write string and newline to file descriptor.
+ * @param s String.
+ * @param fd File descriptor.
+ */
+void	ft_putendl_fd(char *s, int fd)
+{
+	size_t	i;
 
+	i = 0;
+	if (!s)
+		return ;
+	while (s[i] != '\0')
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+	write(fd, "\n", 1);
+}

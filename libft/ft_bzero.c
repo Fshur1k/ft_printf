@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofedota <ofedota@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/01 18:51:26 by ofedota           #+#    #+#             */
-/*   Updated: 2025/12/08 21:39:06 by ofedota          ###   ########.fr       */
+/*   Created: 2025/11/12 15:18:54 by ofedota           #+#    #+#             */
+/*   Updated: 2025/11/18 10:58:31 by ofedota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
+#include <stddef.h>
 
-int		ft_printf(const char *str, ...);
-void	print_uint(unsigned int num);
-int		ft_print_hex(unsigned int num, int is_upper);
-int		ft_print_ptr(void *ptr);
-int		len_uint(unsigned int num);
+/**
+ * @brief Zero out a memory block.
+ * @param s Pointer to memory.
+ * @param len Number of bytes.
+ */
+void	ft_bzero(void *s, size_t len)
+{
+	unsigned char	*p_str;
 
+	p_str = (unsigned char *)s;
+	while (len > 0)
+	{
+		*p_str = '\0';
+		p_str++;
+		len--;
+	}
+}

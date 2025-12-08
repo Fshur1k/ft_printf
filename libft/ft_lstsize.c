@@ -1,20 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofedota <ofedota@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/01 18:51:26 by ofedota           #+#    #+#             */
-/*   Updated: 2025/12/08 21:39:06 by ofedota          ###   ########.fr       */
+/*   Created: 2025/11/24 17:43:07 by ofedota           #+#    #+#             */
+/*   Updated: 2025/11/24 18:16:12 by ofedota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
+#include "libft.h"
 
-int		ft_printf(const char *str, ...);
-void	print_uint(unsigned int num);
-int		ft_print_hex(unsigned int num, int is_upper);
-int		ft_print_ptr(void *ptr);
-int		len_uint(unsigned int num);
+/**
+ * @brief Count the number of nodes.
+ * @param lst First element.
+ * @return Length 
+ */
+int	ft_lstsize(t_list *lst)
+{
+	size_t	i;
+	t_list	*current;
 
+	i = 0;
+	if (!lst)
+		return (i);
+	current = lst;
+	while (current != NULL)
+	{
+		current = current->next;
+		i++;
+	}
+	return (i);
+}

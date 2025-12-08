@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofedota <ofedota@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/01 18:51:26 by ofedota           #+#    #+#             */
-/*   Updated: 2025/12/08 21:39:06 by ofedota          ###   ########.fr       */
+/*   Created: 2025/11/10 06:43:29 by ofedota           #+#    #+#             */
+/*   Updated: 2025/11/18 10:59:05 by ofedota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
+#include "libft.h"
 
-int		ft_printf(const char *str, ...);
-void	print_uint(unsigned int num);
-int		ft_print_hex(unsigned int num, int is_upper);
-int		ft_print_ptr(void *ptr);
-int		len_uint(unsigned int num);
-
+/**
+ * @brief Check if character is alphabetic (A–Z or a–z).
+ * @param n Character to check.
+ * @return 1 if true, 0 otherwise.
+ */
+int	ft_isalpha(int n)
+{
+	return ((n >= 'A' && n <= 'Z') || (n >= 'a' && n <= 'z'));
+}

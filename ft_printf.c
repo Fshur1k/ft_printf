@@ -6,7 +6,7 @@
 /*   By: ofedota <ofedota@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 21:25:14 by ofedota           #+#    #+#             */
-/*   Updated: 2025/12/01 21:51:04 by ofedota          ###   ########.fr       */
+/*   Updated: 2025/12/08 22:26:29 by ofedota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,20 @@
 #include "ft_printf.h"
 #include <stdarg.h>
 
-int	ft_print_ptr(void *ptr);
+static int write_str(char *str)
+{
+	int count;
+
+	count = 0;
+	if (str == NULL)
+		str = "(null)";
+	while (*str)
+	{
+		count += write(1, str, 1);
+		str++;
+	}
+	return (count);
+}
 
 int	ft_printf(const char *str, ...)
 {
@@ -31,22 +44,12 @@ int	ft_printf(const char *str, ...)
 		{
 			i++;
 			char new_char = (char)va_arg(args, int);
-			if (new_char == 0)
-			{
-				ft_putstr_fd("(null)",1);
-				return (count);
-			}
-			write(1, &new_char, 1);
-			count+=1;
+			count+=write(1, &new_char, 1);
 		}
 		else if (str[i] == '%' && str[i+1] == 's')
 		{
 			i++;
-			char *new_str = va_arg(args, char *);
-			if (new_str == NULL)
-                new_str = "(null)";
-			ft_putstr_fd(new_str, 1);
-			count+=ft_strlen(new_str);
+			count += write_str(va_arg(args, char *));
 		}
 		else if (str[i] == '%' && (str[i + 1] == 'd' || str[i + 1] == 'i'))
 		{
@@ -60,8 +63,7 @@ int	ft_printf(const char *str, ...)
 		else if (str[i] == '%' && str[i+1] == 'p')
 		{
 			i++;
-			void *new_long = va_arg(args, void *);
-			count += ft_print_ptr(new_long);
+			count += ft_print_ptr(va_arg(args, void *));
 		}
 		else if  (str[i] == '%' && str[i+1] == 'u')
 		{
@@ -73,11 +75,18 @@ int	ft_printf(const char *str, ...)
 		else if (str[i] == '%' && str[i+1] == 'x')
 		{
 			i++;
-			
+			count += ft_print_hex(va_arg(args, unsigned int), 0);
+		}
+		else if (str[i] == '%' && str[i+1] == 'X')
+		{
+			i++;
+			count += ft_print_hex(va_arg(args, unsigned int), 1);
 		}
 		else
+		{
 			ft_putchar_fd((char)str[i], 1);
 			count++;
+		}
 		i++;
 	}
 	va_end(args);
@@ -87,8 +96,8 @@ int	ft_printf(const char *str, ...)
 
 int main(void)
 {
-	int new_int = -425;
-	printf("%d\n",ft_printf("new char is: %u,\n", new_int));
-	printf("%u", new_int);
+	char *str = NULL;
+	ft_printf("%d\n",ft_printf("%s\n", str));
+	printf("%d\n",printf("%s\n", str));
 	return (0);
 }

@@ -1,20 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofedota <ofedota@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/01 18:51:26 by ofedota           #+#    #+#             */
-/*   Updated: 2025/12/08 21:39:06 by ofedota          ###   ########.fr       */
+/*   Created: 2025/11/12 13:45:04 by ofedota           #+#    #+#             */
+/*   Updated: 2025/11/18 11:05:11 by ofedota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
+#include "libft.h"
 
-int		ft_printf(const char *str, ...);
-void	print_uint(unsigned int num);
-int		ft_print_hex(unsigned int num, int is_upper);
-int		ft_print_ptr(void *ptr);
-int		len_uint(unsigned int num);
+/**
+ * @brief Fill memory block with a byte value.
+ * @param s Pointer to memory.
+ * @param c Byte value.
+ * @param len Number of bytes to fill.
+ * @return Pointer to memory block.
+ */
+void	*ft_memset(void *s, int c, size_t len)
+{
+	unsigned char	*p_str;
 
+	p_str = (unsigned char *)s;
+	while (len > 0)
+	{
+		*p_str = (unsigned char)c;
+		p_str++;
+		len--;
+	}
+	return (s);
+}

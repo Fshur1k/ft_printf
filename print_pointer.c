@@ -6,7 +6,7 @@
 /*   By: ofedota <ofedota@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 16:34:39 by ofedota           #+#    #+#             */
-/*   Updated: 2025/12/01 19:10:13 by ofedota          ###   ########.fr       */
+/*   Updated: 2025/12/08 21:50:29 by ofedota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,44 +15,38 @@
 #include <unistd.h>
 #include "libft/libft.h"
 
-static void hex_base(unsigned long numb)
+static int hex_base(unsigned long numb, char *base)
 {
-	char base[] = "0123456789abcdef";
+	int	count;
+
+	count = 0;
 	if (numb >= 16)
 	{
-		hex_base(numb/16);
+		count += hex_base(numb/16, base);
 	}
-	write(1, &base[numb%16], 1);
+	count += write(1, &base[numb%16], 1);
+	return (count);
 }
 
-static int	ft_len_ptr(unsigned long num)
+int ft_print_hex(unsigned int num, int is_upper)
 {
-	int	len;
-
-	len = 0;
-	if (num == 0)
-		return (1);
-	while (num != 0)
-	{
-		len++;
-		num = num / 16;
-	}
-	return (len);
+	if (num  == 0)
+		return (write(1, "0", 1));
+	if (is_upper)
+		return (hex_base((unsigned long)num, "0123456789ABCDEF"));
+	else
+		return (hex_base((unsigned long)num, "0123456789abcdef"));
 }
+
 int	ft_print_ptr(void *ptr)
 {
 	unsigned long long_int;
-	int	total_len;
 
-	total_len = 0;
 	if (ptr == NULL)
 	{
 		ft_putstr_fd("(nil)",1);
 		return (5);
 	}
 	long_int = (unsigned long)ptr;
-	total_len = 2 + ft_len_ptr(long_int);
-	ft_putstr_fd("0x",1);
-	hex_base(long_int);
-	return (total_len);
+	return (write(1, "0x", 2) + hex_base(long_int, "0123456789abcdef"));
 }
