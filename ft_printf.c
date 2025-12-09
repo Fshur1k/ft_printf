@@ -6,7 +6,7 @@
 /*   By: ofedota <ofedota@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 21:25:14 by ofedota           #+#    #+#             */
-/*   Updated: 2025/12/09 11:20:37 by ofedota          ###   ########.fr       */
+/*   Updated: 2025/12/09 12:00:10 by ofedota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ static int	ft_eval_format(va_list args, char format)
 	return (0);
 }
 
+/**
+ * @brief Outputs formatted data to stdout.
+ * @param str Format string containing conversion specifications.
+ * @param ... Variable arguments to be formatted and printed.
+ * @return The total number of characters printed.
+ */
 int	ft_printf(const char *str, ...)
 {
 	va_list	args;
