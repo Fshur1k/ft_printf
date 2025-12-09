@@ -18,6 +18,7 @@ To create library `libftprintf.a` you should use command: ```make```
 To recompile library you can call: ```make re```
 
 To delete all object files, use: ```make clean```
+
 ```make fclean``` : deletes `libftprintf.a`
 
 To compile with file that contains test program you should compile with the following flags
