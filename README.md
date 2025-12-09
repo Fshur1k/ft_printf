@@ -22,9 +22,9 @@ To delete all object files, use: ```make clean```
 
 To compile with file that contains test program you should compile with the following flags
 
-```cc <your_test_file.c> -L. -lftprintf -o test```
+```cc main.c -L. -lftprintf -Wall -Wextra -Werror -o main```
 
-```./test```
+```./main```
 
 ## Resources:
 Project has file ``ft_printf.c`` that does main logic and additional files:
