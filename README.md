@@ -1,5 +1,5 @@
 # ft_printf
-This project has been created as part of the 42 curriculum by **ofedota**
+*This project has been created as part of the 42 curriculum by **ofedota***
 
 ## Description
 This project implements the `printf` function from the standard library `stdio.h`
